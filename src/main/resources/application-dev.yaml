@@ -1,0 +1,41 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /desafio-votacao
+
+spring:
+  application:
+    name: desafio-votacao
+  datasource:
+    url: ${URL_DB:jdbc:postgresql://localhost:5432/desafio-votacao}
+    username: ${USERNAME_DB:usuario}
+    password: ${PASSWORD_DB:senha}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connectionTimeout: ${CONNECTION_TIMEOUT:20000}
+      maximumPoolSize: ${MAXIMUM_POOL_SIZE:5}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
+
+async:
+  corePoolSize: ${CORE_POOL_SIZE:1}
+  maxPoolSize: ${MAX_POOL_SIZE:5}
+  queueCapacity: ${QUEUE_CAPACITY:5}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+controllers:
+  pauta:
+    pauta-v1:
+      path: /v1/api/pautas
